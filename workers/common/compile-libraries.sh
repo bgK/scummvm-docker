@@ -33,18 +33,20 @@ set_toolchain () {
 	# and cc/c++ are the actual compilers, and not having the correct API level
 	# screws up system headers which were changed between API versions
 
-	if [ "$CLANG" != "" ]; then
-		export CC=$CLANG
-	elif [ "$GCC" != "" ]; then
+#	if [ "$CLANG" != "" ]; then
+#		export CC=$CLANG
+#	elif [ "$GCC" != "" ]; then
+	if [ "$GCC" != "" ]; then
 		export CC=$GCC
 	elif [ "$CC" == "" ]; then
 		warning "Could not find a C compiler"
 		exit 1
 	fi
 
-	if [ "$CLANGXX" != "" ]; then
-		export CXX=$CLANGXX
-	elif [ "$GXX" != "" ]; then
+#	if [ "$CLANGXX" != "" ]; then
+#		export CXX=$CLANGXX
+#	elif [ "$GXX" != "" ]; then
+	if [ "$GXX" != "" ]; then
 		export CXX=$GXX
 	elif [ "$CXX" == "" ]; then
 		warning "Could not find a C++ compiler"
