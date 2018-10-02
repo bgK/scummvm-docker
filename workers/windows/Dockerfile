@@ -68,6 +68,9 @@ RUN ./compile-libraries-windows.sh expat
 COPY ${WORKER_NAME}/library-rules/wxwidgets3.0.sh library-rules/
 RUN ./compile-libraries-windows.sh wxwidgets3.0
 
+COPY common/library-rules/glew.sh library-rules/
+RUN ./compile-libraries-windows.sh glew
+
 ARG SPARKLE_VERSION=0.5.7
 
 WORKDIR /tmp
@@ -113,8 +116,8 @@ RUN dpkg --add-architecture i386 && \
 COPY --from=compiler /usr/i686-w64-mingw32 /usr/i686-w64-mingw32
 COPY --from=compiler /usr/x86_64-w64-mingw32 /usr/x86_64-w64-mingw32
 
-# Hacky way to force use of static libz
-RUN bash -c 'rm /usr/{x86_64,i686}-w64-mingw32/lib/{libz.dll.a,zlib1.dll}'
+# Hacky way to force use of static libz and iconv
+RUN bash -c 'rm /usr/{x86_64,i686}-w64-mingw32/lib/{libz.dll.a,zlib1.dll,libiconv.dll.a}'
 
 ARG INNOSETUP_VERSION=5.5.9
 
