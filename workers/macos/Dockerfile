@@ -43,6 +43,7 @@ ENV MACOSX_DEPLOYMENT_TARGET=10.6
 # libmpeg2 comes with a ton of dependencies because the osxcross macports script
 # does not understand variants, so is disabled for the moment
 RUN echo 1 | VERBOSE=1 osxcross-macports -s install \
+		glew \
 		faad2 \
 		flac \
 		freetype \
