@@ -88,6 +88,7 @@ RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		clang \
 		llvm-dev \
+		pkg-config \
 		uuid-dev \
 		&& \
 	rm -rf /var/lib/apt/lists/*
@@ -123,8 +124,8 @@ ENV PATH=$PATH:/opt/osxcross/bin:/opt/osxcross/macports/pkgs/opt/local/bin:/opt/
 	NMEDIT=x86_64-apple-darwin12-nmedit \
 	OTOOL=x86_64-apple-darwin12-otool \
 	PAGESTUFF=x86_64-apple-darwin12-pagestuff \
-	PKG_CONFIG=x86_64-apple-darwin12-pkg-config \
-	PKG_CONFIG_PATH=/opt/osxcross/macports/pkgs/opt/local/lib/pkgconfig \
+	PKG_CONFIG_SYSROOT_DIR=/opt/osxcross/macports/pkgs \
+	PKG_CONFIG_LIBDIR=/opt/osxcross/macports/pkgs/opt/local/lib/pkgconfig \
 	RANLIB=x86_64-apple-darwin12-ranlib \
 	REDO_PREBINDING=x86_64-apple-darwin12-redo_prebinding \
 	SEG_ADDR_TABLE=x86_64-apple-darwin12-seg_addr_table \
