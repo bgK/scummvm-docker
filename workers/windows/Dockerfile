@@ -71,6 +71,9 @@ RUN ./compile-libraries-windows.sh wxwidgets3.0
 COPY common/library-rules/glew.sh library-rules/
 RUN ./compile-libraries-windows.sh glew
 
+COPY ${WORKER_NAME}/library-rules/a52dec.sh library-rules/
+RUN ./compile-libraries-windows.sh a52dec
+
 ARG SPARKLE_VERSION=0.5.7
 
 WORKDIR /tmp
