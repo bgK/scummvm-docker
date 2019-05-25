@@ -8,6 +8,10 @@ WORKDIR /tmp/compile
 # dpkg-dev is required to retrieve sources from apt
 RUN sed 's/^deb \(.*\)/deb-src \1/' /etc/apt/sources.list \
 		> /etc/apt/sources.list.d/debsrc.list && \
+	echo "APT::Default-Release "stable";" \
+		> /etc/apt/apt.conf.d/99defaultrelease && \
+	sed 's/stretch/testing/' /etc/apt/sources.list.d/debsrc.list \
+		> /etc/apt/sources.list.d/debsrc-testing.list && \
 	apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		cmake \
@@ -24,7 +28,7 @@ COPY common/library-rules/libpng1.6.sh library-rules/
 RUN ./compile-libraries-windows.sh libpng1.6
 
 COPY common/library-rules/freetype.sh library-rules/
-RUN ./compile-libraries-windows.sh freetype
+RUN ./compile-libraries-windows.sh freetype/testing
 
 COPY common/library-rules/libjpeg-turbo.sh library-rules/
 RUN ./compile-libraries-windows.sh libjpeg-turbo

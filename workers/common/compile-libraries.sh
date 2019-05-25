@@ -64,7 +64,7 @@ do_fetch () {
 	if [ -d $library*/ ]; then
 		rm -r $library*/
 	fi
-	DEBIAN_FRONTEND=noninteractive apt-get source -y $library
+	DEBIAN_FRONTEND=noninteractive apt-get source -y $package
 	cd $library*/
 }
 
@@ -80,7 +80,12 @@ num_cpus=$(nproc || grep -c ^processor /proc/cpuinfo || echo 1)
 build_library () {
 	host=$1
 	prefix=$2
-	library=$3
+	package=$3
+	if [[ $3 == *"/"* ]]; then
+		library=$(echo $library | cut -d/ -f1)
+	else
+		library=$3
+	fi
 
 	local rules_file="$root_dir/library-rules/$library.sh"
 	if [ -f "$rules_file" ]; then
